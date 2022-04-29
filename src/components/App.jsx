@@ -8,7 +8,7 @@ function App() {
   const contactAmount = useSelector(state => state.contacts.items.length);
   return (
     <>
-      <Section title="Phonebook">
+      <Section title="Phone Book">
         <AddContactForm />
       </Section>
       {contactAmount > 0 && (

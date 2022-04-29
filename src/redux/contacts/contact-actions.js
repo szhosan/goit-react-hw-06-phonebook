@@ -9,4 +9,5 @@ const deleteContact = createAction('contacts/Delete');
 
 const changeFilter = createAction('contacts/ChangeFilter');
 
+/* eslint import/no-anonymous-default-export: [2, {"allowObject": true}] */
 export default { addContact, changeFilter, deleteContact };

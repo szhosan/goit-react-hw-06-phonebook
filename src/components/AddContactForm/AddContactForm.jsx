@@ -32,7 +32,7 @@ function AddContactForm() {
     if (!nameAlreadyExist(addedContacts, contact.name)) {
       dispatch(contactActions.addContact(contact));
     } else {
-      alert(`Name ${contact.name} already exists in your phonebook`);
+      alert(`Name ${contact.name} already exists in your phone book`);
     }
 
     reset();
@@ -47,7 +47,7 @@ function AddContactForm() {
           type="text"
           name="name"
           pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-          title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
+          title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer"
           required
           value={contact.name}
           onChange={handleChange}
