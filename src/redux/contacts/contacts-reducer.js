@@ -16,7 +16,7 @@ const items = createReducer(defaultValues, {
 });
 
 const filter = createReducer('', {
-  [actions.changeFilter]: (state, { payload }) => payload,
+  [actions.changeFilter]: (_, { payload }) => payload,
 });
 
 export default combineReducers({ items, filter });
