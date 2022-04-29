@@ -1,25 +1,39 @@
 import { useState } from 'react';
 import s from './AddContactForm.module.css';
-import PropTypes from 'prop-types';
+import contactActions from '../../redux/contacts/contact-actions';
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
-function AddContactForm({ onSubmit }) {
-  const [state, setState] = useState({ name: '', number: '' });
+function AddContactForm() {
+  const [contact, setContact] = useState({ name: '', number: '' });
+
+  const dispatch = useDispatch();
+  const addedContacts = useSelector(state => state.contacts.items);
 
   const handleChange = e => {
     const { name, value } = e.currentTarget;
-    setState(prevState => {
+    setContact(prevState => {
       return { ...prevState, [name]: value };
     });
   };
 
+  const nameAlreadyExist = (contacts, nameToAdd) => {
+    return contacts.find(
+      contact => contact.name.toLowerCase() === nameToAdd.toLowerCase()
+    );
+  };
+
   const reset = () => {
-    setState({ name: '', number: '' });
+    setContact({ name: '', number: '' });
   };
 
   const handleSubmit = e => {
     e.preventDefault();
-
-    onSubmit(state);
+    if (!nameAlreadyExist(addedContacts, contact.name)) {
+      dispatch(contactActions.addContact(contact));
+    } else {
+      alert(`Name ${contact.name} already exists in your phonebook`);
+    }
 
     reset();
   };
@@ -35,7 +49,7 @@ function AddContactForm({ onSubmit }) {
           pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
           title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
           required
-          value={state.name}
+          value={contact.name}
           onChange={handleChange}
         />
       </label>
@@ -47,7 +61,7 @@ function AddContactForm({ onSubmit }) {
           type="tel"
           name="number"
           required
-          value={state.number}
+          value={contact.number}
           onChange={handleChange}
         />
       </label>
@@ -58,7 +72,5 @@ function AddContactForm({ onSubmit }) {
     </form>
   );
 }
-
-AddContactForm.propTypes = { onSubmit: PropTypes.func.isRequired };
 
 export default AddContactForm;

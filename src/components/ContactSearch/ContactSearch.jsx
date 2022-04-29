@@ -1,17 +1,21 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import contactActions from '../../redux/contacts/contact-actions';
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
-const ContactSearch = ({ value, onChange }) => (
-  <label>
-    Find contacts by name
-    <br />
-    <input type="text" value={value} onChange={onChange} />
-  </label>
-);
-
-ContactSearch.propTypes = {
-  value: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired,
+const ContactSearch = () => {
+  const value = useSelector(state => state.contacts.filter);
+  const dispatch = useDispatch();
+  const onChange = e => {
+    dispatch(contactActions.changeFilter(e.currentTarget.value));
+  };
+  return (
+    <label>
+      Find contacts by name
+      <br />
+      <input type="text" value={value} onChange={onChange} />
+    </label>
+  );
 };
 
 export default ContactSearch;
