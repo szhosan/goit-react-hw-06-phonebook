@@ -1,6 +1,6 @@
 import React from 'react';
 import s from './ContactsList.module.css';
-import contactActions from '../../redux/contacts/contact-actions';
+import { deleteContact } from '../../redux/contacts/contacts-reducer';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 
@@ -21,7 +21,7 @@ const ContactsList = () => {
               {name}: {number}
               <button
                 className={s.button}
-                onClick={() => dispatch(contactActions.deleteContact(id))}
+                onClick={() => dispatch(deleteContact(id))}
               >
                 Delete
               </button>

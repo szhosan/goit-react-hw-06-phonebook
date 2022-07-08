@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import s from './AddContactForm.module.css';
-import contactActions from '../../redux/contacts/contact-actions';
+import { addContact } from '../../redux/contacts/contacts-reducer';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 
@@ -30,7 +30,7 @@ function AddContactForm() {
   const handleSubmit = e => {
     e.preventDefault();
     if (!nameAlreadyExist(addedContacts, contact.name)) {
-      dispatch(contactActions.addContact(contact));
+      dispatch(addContact(contact));
     } else {
       alert(`Name ${contact.name} already exists in your phone book`);
     }
